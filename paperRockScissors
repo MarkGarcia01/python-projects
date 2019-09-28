@@ -1,0 +1,117 @@
+# Paper, Rock Scissors
+# Mark Garcia
+# 9/27/2019
+
+import random
+
+# Define Variables
+games = 0
+player1Counter = 0
+player2Counter = 0
+tieCounter = 0
+
+# Define Functions
+def shoot(roll):
+    Shoot = random.sample(range(3), 1) #Pick 1 number between 1 and 3
+
+    if Shoot[0] == 0:
+        roll = "Paper"
+        
+    elif Shoot[0] == 1:
+        roll = "Rock"
+        
+    else:
+        roll = "Scissors"
+        
+    return(roll)
+
+def winner(play1, play2):
+    win = " "
+    #Determine how a winner is made
+    if play1 == "Paper" and play2 == "Scissors":
+        win = "Player 2"
+        return win
+
+    elif play1 == "Rock" and play2 == "Paper":
+        win = "Player 2"
+        return win
+
+    elif play1 == "Scissors" and play2 == "Rock":
+        win = "Player 2"
+        return win
+    #Determine how a tie is made
+    elif play1 == "Paper" and play2 == "Paper":
+        win = "Tie"
+        return win
+
+    elif play1 == "Rock" and play2 == "Rock":
+        win = "Tie"
+        return win
+
+    elif play1 == "Scissors" and play2 == "Scissors":
+        win = "Tie"
+        return win
+
+    else:
+        win = "Player 1"
+        return win
+
+# Define number of games to be played
+while games < 3:
+    
+    hand1 = 'Roll'
+    hand2 = 'Roll'
+    player1 = shoot(hand1)
+    player2 = shoot(hand2)
+
+    # Show the outcome
+    print(f'Player 1, you shot... {player1}')
+    print(f'Player 2, you shot... {player2}')
+
+    # Determine the winner
+    findWinner = winner(player1, player2)
+
+    print(f'{findWinner} is the winner!')
+    print('*******************************')
+
+    # Increment counters
+    if findWinner == "Player 1":
+        player1Counter += 1
+
+    elif findWinner == "Player 2":
+        player2Counter += 1
+
+    else:
+        tieCounter += 1
+
+    games += 1
+
+    # Display stats
+    print(f'Player 1 wins = {player1Counter}\nPlayer 2 wins = {player2Counter}\
+    \nTies = {tieCounter}\n')
+
+
+# Determine Overall Winner if no ties are present
+if player1Counter > player2Counter and player1Counter > tieCounter:
+    print('The overall winner is Player 1!')
+
+elif player2Counter > player1Counter and player2Counter > tieCounter:
+    print('The overall winner is Player 2!')
+
+elif tieCounter > player1Counter and tieCounter > player2Counter:
+    print('Ties won more games than both players!')
+
+elif player1Counter == player2Counter or tieCounter:
+    print('No overall winner...')
+
+elif player2Counter == tieCounter or player1Counter:
+    print('No overall winner...')
+
+else:
+    print('No overall winner...')
+
+# Flush memory
+del games
+del player1Counter
+del player2Counter
+del tieCounter
